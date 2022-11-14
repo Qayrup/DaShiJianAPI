@@ -10,7 +10,7 @@ const expressJWT = require('express-jwt').expressjwt({
     secret: jwtKey,
     requestProperty: 'userInfo',
     algorithms: ["HS256"]
-}).unless({ path: [/^\/api\//] })
+}).unless({ path: [/^\/api\//, /^\/uploads\//] })
 
 module.exports = {
     cors,

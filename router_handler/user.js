@@ -36,7 +36,6 @@ function signUp(req, res) {
 
 // 登录的处理函数
 function signIn(req, res) {
-    console.log(req.body)
     let { userName, password } = req.body;
     const selectSqlStr = 'select * from users where userName=?'
     db.query(selectSqlStr, userName, (err, results) => {

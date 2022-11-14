@@ -1,6 +1,7 @@
 module.exports = {
     portNumber: '80',
     systemPrompts: 'api server running at http://127.0.0.1:80',
+    address: 'http://127.0.0.1',
     jwtKey: 'hello JiuMeilove No.1 ^_^!',
     jwtKeyDate: '24h'
 }

@@ -1,11 +1,10 @@
 const db = require('../db');
 const bcrypt = require('bcryptjs')
 function getUserInfo(req, res) {
-    console.log(req.userInfo)
     selectUserInfoSql = 'select * from users where id=?'
     db.query(selectUserInfoSql, req.userInfo.id, (err, results) => {
         if (err) return res.backTips(err);
-        if (results.length != 1) return res.backTips('用户信息获取失败')
+        if (results.length != 1) return res.backTips('用户信息获取失败');
         // 伪造一个假密码
         results = { ...results[0], password: Math.random().toString(36).slice(-8) }
         return res.send({
@@ -25,7 +24,6 @@ function updateUserInfo(req, res) {
     db.query(updateSqlStr, [userInfo, userInfo.id], (err, results) => {
         //执行sql出错返回
         if (err) return req.backTips(err);
-        console.log(results)
         if (results.affectedRows != 1) return res.backTips('用户信息更新失败');
         //修改用户成功
         res.backTips('用户信息修改成功', 0);

@@ -15,7 +15,7 @@ const joi = require('joi')
 //定义id验证规则
 const id = joi.number().integer().min(1).required();
 //定义用户名验证规则
-const userName = joi.string().alphanum().min(3).max(9).required()
+const userName = joi.string().alphanum().min(1).max(9).required()
     .error(new Error("输入登录账号格式有误！"));
 // 定义用户密码验证规则
 const password = joi.string().min(3).max(18).required().pattern(/^[\S]{6,12}$/);
@@ -39,7 +39,7 @@ const reg_updatePassword_validateRule = {
     body: { 'oldPassword': password, newPassword }
 }
 const reg_updateAvatar_validateRule = {
-    body: { 'avatar': avatar }
+    body: { avatar }
 }
 module.exports = {
     reg_signupOrSignin_validateRule,

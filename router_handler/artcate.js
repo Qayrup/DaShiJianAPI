@@ -2,7 +2,7 @@ const db = require("../db")
 
 //获取文章分类函数
 function getArticleCates(req, res) {
-    const selectSqlStr = 'select * from article_cate where is_delete=0 order by id asc'
+    const selectSqlStr = 'select * from article_cate where is_delete=0 order by id desc'
     db.query(selectSqlStr, (err, results) => {
         if (err) return res.backTips(err);
         if (results.length < 1) return res.backTips('没有查询到数据')
@@ -12,7 +12,6 @@ function getArticleCates(req, res) {
 //新增文章分类
 function addArticleCates(req, res) {
     const catesInfo = (({ name, alias }) => ({ name, alias }))(req.body);
-    console.log(catesInfo)
     //定义查询分类名与别名是否被占用sqlStr
     const selectSqlStr = 'select * from article_cate where name=?or alias=? '
     db.query(selectSqlStr, [catesInfo.name, catesInfo.alias], (err, results) => {
@@ -60,7 +59,7 @@ function getArtCateById(req, res) {
         // SQL 语句执行成功，但是没有查询到任何数据
         if (results.length != 1) return res.backTips('获取文章分类失败');
         // 把数据响应给客户端
-        return res.backTips('获取文章分类成功', 0, results)
+        return res.backTips('获取文章分类成功', 0, results[0])
     });
 }
 function updateCateById(req, res) {
